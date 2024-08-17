@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>detalleslibro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Imagen de la Portada del Libro -->
+  <ion-img src="assets/img/portada-libro.jpg"></ion-img>
+
+  <!-- Detalles del Libro -->
+  <ion-text color="primary">
+    <h2>{{ nombreLibro }} | {{ genero }}</h2>
+    <p>{{ autorLibro }} | {{ categoria }}</p>
+  </ion-text>
+
+  <!-- Sinopsis -->
+  <ion-card>
+    <ion-card-content>
+      <p>{{ sinopsis }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ISBN, Leído/No leído, Cantidad de Páginas -->
+  <ion-text color="secondary">
+    <p>ISBN: {{ isbn }} | {{ estadoLectura }} | {{ cantidadPaginas }} páginas</p>
+  </ion-text>
+
+</ion-content>
