@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>perfilusuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Contenedor de Foto y Datos del Usuario -->
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img [src]="user.photoUrl" alt="Foto de {{ user.name }}">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+    </ion-label>
+  </ion-item>
+
+  <!-- Libros Leídos -->
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>Libros Leídos</ion-label>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let book of user.readBooks">
+          <ion-card (click)="goToBookDetail(book)">
+            <img [src]="book.coverImage" alt="{{ book.title }}">
+            <ion-card-header>
+              <ion-card-title>{{ book.title }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+</ion-content>

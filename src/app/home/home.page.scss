@@ -1,0 +1,15 @@
+ion-content {
+  background-color: #f6e9d1;
+}
+
+#container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;    /* Centra verticalmente */
+  height: 100vh;          /* Ocupa toda la altura de la ventana */
+}
+
+img {
+  width: 80%;            /* Ajusta el tamaño del logo según sea necesario */
+  max-width: 300px;
+}
