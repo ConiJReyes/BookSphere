@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
+  searchQuery: string = '';
+
+
   constructor() {}
 
 }

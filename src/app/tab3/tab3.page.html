@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Usuario
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,36 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img [src]="user.photoUrl" alt="Foto de {{ user.name }}">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+    </ion-label>
+  </ion-item>
+
+  <!-- Libros Leídos -->
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>Libros Leídos</ion-label>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let book of user.readBooks">
+          <ion-card (click)="goToBookDetail(book)">
+            <img [src]="book.coverImage" alt="{{ book.title }}">
+            <ion-card-header>
+              <ion-card-title>{{ book.title }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+  <ion-button shape="round" [routerLink] ="['/login']" class="btn-InSesion">Inisiar Sesion</ion-button>
+
 </ion-content>

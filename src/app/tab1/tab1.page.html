@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Barra de busqueda
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,34 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+   <!-- Barra de Búsqueda -->
+   <ion-searchbar 
+   placeholder="Buscar por Título, Autor, ISBN" 
+   [(ngModel)]="searchQuery" 
+   (ionInput)="searchBooks($event)"
+   debounce="500">
+ </ion-searchbar>
+
+ <!-- Resultados de Búsqueda -->
+ <ion-list>
+   <ion-item *ngFor="let book of filteredBooks">
+     <ion-thumbnail slot="start">
+       <img [src]="book.image" alt="{{ book.title }}">
+     </ion-thumbnail>
+     <ion-label>
+       <h2>{{ book.title }}</h2>
+       <p>{{ book.author }}</p>
+     </ion-label>
+   </ion-item>
+ </ion-list>
+
+ <!-- Carga de más resultados -->
+ <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreBooks($event)">
+   <ion-infinite-scroll-content
+     loadingSpinner="bubbles"
+     loadingText="Cargando más resultados...">
+   </ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+  
 </ion-content>
