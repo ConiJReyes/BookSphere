@@ -1,6 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -16,25 +15,34 @@
     </ion-toolbar>
   </ion-header>
 
-
-  <div>
-      
+  <div class="container">
     <ion-item>
-      <ion-input label="Usuario" labelPlacement="floating" 
-      placeholder="Ingrese su usuario"></ion-input>
+      <ion-input
+        label="Usuario"
+        labelPlacement="floating"
+        placeholder="Ingrese su usuario"
+        [(ngModel)]="usuario"
+      ></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="Contraseña" labelPlacement="floating" 
-      type="password"  
-      placeholder="Ingrese su contraseña">
+      <ion-input
+        label="Contraseña"
+        labelPlacement="floating"
+        type="password"
+        placeholder="Ingrese su contraseña"
+        [(ngModel)]="password"
+      >
       </ion-input>
     </ion-item>
 
-    <ion-button shape="round">Inisiar Sesion</ion-button>
+    <ion-button shape="round" class="btn-InSesion">Inisiar Sesion</ion-button>
 
-    <ion-button shape="round">Registrarse</ion-button>
-
+    <ion-button
+      shape="round"
+      class="btn-InSesion"
+      [routerLink]="['/registrarse']"
+      >Registrarse</ion-button
+    >
   </div>
-
 </ion-content>
