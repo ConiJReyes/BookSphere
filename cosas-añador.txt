@@ -1,0 +1,17 @@
+Pages
+
+
+-poners las variables en los inputs de editar libros
+
+-validar 'TODOS' los formularios, como el de añadir libro, editar, etc 
+
+-poner alertas al momento de borrar y editar los libros
+
+-Poner descripcion en el array y en el dettale de livro
+
+- hay un error q hay que ver con el profe, que si en el ts de la pagina detalles de libro(cada-libro) se pone que no salgan
+  ningun menu con el menucontroller, en la pagina de todos los libros no sale el boton del sidemenu, asiq tuve que poner el 
+  menu en todas las paginas en el cual no queria poner el menu porq sino no podia devolverme
+
+-borrar todos los navigationsextras que no se usen, nose si los quite todos
+

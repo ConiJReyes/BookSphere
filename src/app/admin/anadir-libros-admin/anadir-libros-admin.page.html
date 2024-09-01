@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Añadir Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="container">
+    <h1>Ingresar Nuevo Libro</h1>
+    <ion-item>
+      <ion-input [(ngModel)]="nomLibAnadir" label="Nombre Libro"  labelPlacement="floating"
+      placeholder="Ingrese el nombre del libro"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="autorLibAnadir" label="Autor" labelPlacement="floating"
+      placeholder="Ingrese el nombre del autor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="categoriaLibAnadir" label="Categoría" labelPlacement="floating"
+      placeholder="Ingrese el tipo de categoría"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea [(ngModel)]="descripcionLibAnadir" class="input-desc" label="Descripción" labelPlacement="floating"
+      placeholder="Ingrese una descripción"></ion-textarea>
+    </ion-item>
+    <ion-button  color="primary" shape="round" (click)="AnadirLibro()">Añadir Libro</ion-button>
+
+  </div>
+
+</ion-content>

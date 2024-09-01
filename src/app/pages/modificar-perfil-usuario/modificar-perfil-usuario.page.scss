@@ -1,0 +1,32 @@
+ion-content {
+    background-color: #f6e9d1; /* Color de fondo */
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px; /* Bordes redondeados del contenedor */
+    background-color: #ffffff; /* Fondo blanco del contenedor */
+    max-width: 500px; /* Ancho máximo del contenedor */
+    margin: auto;
+  }
+  
+
+  
+  .form-item {
+    margin-bottom: 15px; /* Espacio entre los campos de entrada */
+  }
+  
+  ion-button {
+    margin-top: 10px; /* Espacio superior del botón */
+  }
+
+h1{
+    color: #6D4C41;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+  

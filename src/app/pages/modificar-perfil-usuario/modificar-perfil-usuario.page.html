@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="container">
+
+    <h1>Modificar Usuario</h1>
+
+    <form>
+      <ion-item class="form-item">
+        <ion-input
+          label="Usuario"
+          labelPlacement="floating"
+          [(ngModel)]="usuario"
+          name="username"
+          placeholder="Ingrese el usuario"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-item class="form-item">
+        <ion-input
+          label="Email"
+          labelPlacement="floating"
+          [(ngModel)]="correo"
+          name="email"
+          placeholder="Ingrese el email"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-item class="form-item">
+        <ion-input
+          label="Contraseña"
+          type="password"
+          labelPlacement="floating"
+          [(ngModel)]="contrasena"
+          name="password"
+          placeholder="Ingrese la contraseña"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-item class="form-item">
+        <ion-input
+          label="Repetir Contraseña"
+          type="password"
+          labelPlacement="floating"
+          [(ngModel)]="contrasenaR"
+          name="passwordR"
+          placeholder="Repita la contraseña"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-button
+        shape="round"
+        expand="full"
+        color="primary"
+        type="submit"
+        (click)="ModificarPerfil()"
+        >Cambiar Perfil</ion-button
+      >
+    </form>
+
+  </div>
+</ion-content>
