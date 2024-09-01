@@ -15,10 +15,8 @@
          <ion-card-title>{{ libro.titulo }}</ion-card-title>
        <ion-card-content>
          <p>{{ libro.autor }}</p>
+         <p>Cantidad de páginas: {{ libro.paginas }}</p>
        </ion-card-content>
-       <ion-card-content>
-        <p>Cantidad de páginas: {{ libro.paginas }}</p>
-      </ion-card-content>
        <ion-button (click)="AnadiraFavoritos()" color="warning" shape="round">Añadir a favoritos</ion-button>
        <ion-button (click)="MarcarLeido()" color="primary" shape="round">Marcar Como leído</ion-button>
       </ion-card-header>
