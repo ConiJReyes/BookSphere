@@ -33,6 +33,7 @@ export class TodosLosLibrosPage implements OnInit {
     // agregar más categorías
     { titulo: 'Romper el círculo', autor: 'Colleen Hoover', imagen: 'assets/img/romperelcirculo.webp' },
     { titulo: 'Tan Poca Vida', autor: 'Hanya Yanagihara', imagen: 'assets/img/tanpocavida.webp' },
+    { titulo: 'Libro Troll', autor: 'ElRubiusOMG', imagen:'assets/img/librotroll.webp'}
   ];
 
   constructor(private menuController: MenuController) {

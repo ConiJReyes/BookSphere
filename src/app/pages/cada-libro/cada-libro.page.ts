@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -9,6 +8,7 @@ import { MenuController, ToastController } from '@ionic/angular';
 })
 export class CadaLibroPage implements OnInit {
 
+ seleccionado : string = "Leido";
  libro : any = { titulo: 'Harry Potter y la piedra filosofal', autor: 'J.K. Rowling',paginas: 333 ,imagen: 'assets/img/librohp1.webp'}
 
   constructor(private menuController : MenuController, private ToastController:ToastController){

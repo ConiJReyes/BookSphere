@@ -14,6 +14,12 @@ export class RegistrarsePage implements OnInit {
   email: string | undefined;
   passwordR: string | undefined;
 
+
+  correoValido : boolean = false;
+  contraValida : boolean = false;
+  contraIgual : boolean = false;
+
+
   // el alertcontroller es para las pantallaz de errores emergentes, bueno no necesariamente de errores
   constructor(
     private router: Router,
@@ -37,13 +43,13 @@ export class RegistrarsePage implements OnInit {
   }
 
 //de esta forma porque el any no es tan util para casos de seguridad
-  validarCorreo(email: string): boolean {
+  validarCorreo(email: string){
     const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return patron.test(email);
   }
 //los boolean aca sirven para devolver el valor a si es verdadero o falso
-  validarContrasena(password: string): boolean {
-    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{6,}$/;
+  validarContrasena(password: string) {
+    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
     return patron.test(password);
   }
 
@@ -54,24 +60,32 @@ export class RegistrarsePage implements OnInit {
       return;
     }
 
+    this.correoValido = false;
+    this.contraValida = false;
+    this.contraIgual = false;
+
+    // Validar correo
     if (!this.validarCorreo(this.email)) {
-      //pide que el correo este con el formato que tiene @
-      this.MostrarAlerta('Ingrese un correo válido');
-      return;
+      this.correoValido = true;
     }
 
-    if (!this.validarContrasena(this.password)) {
-      this.MostrarAlerta('La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.');
-      return;
+    // Validar formato de la contraseña
+    if (!this.validarContrasena(this.password) || !this.validarContrasena(this.passwordR)) {
+      this.contraValida = true;
     }
 
+    // Verificar si las contraseñas coinciden
     if (this.password !== this.passwordR) {
-      this.MostrarAlerta('Las contraseñas no coinciden, intentelo nuevamente.');
+      this.contraIgual = true;
+    }
+
+    // Si alguna validación falló, no continuar con el registro
+    if (this.correoValido || this.contraValida || this.contraIgual) {
       return;
     }
 
-    this.Registrarse();
-  }
+      this.Registrarse();
+    }
 //Permite que los datos del user registrados esten disponibles en el login
   Registrarse() {
     let navigationextras: NavigationExtras = {
@@ -81,7 +95,7 @@ export class RegistrarsePage implements OnInit {
         email: this.email
       }
     };
-
+    
     this.router.navigate(['/login'], navigationextras);
   }
 }

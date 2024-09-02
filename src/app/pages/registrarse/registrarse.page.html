@@ -71,6 +71,11 @@
         (click)="validacionDatosCorreo()"
         >Crear Cuenta</ion-button
       >
+
+      
     </form>
+      <p *ngIf="correoValido">-Ingrese un correo válido</p>
+      <p *ngIf="contraValida">-La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.</p>
+      <p *ngIf="contraIgual">-Las contraseñas no coinciden, intentelo nuevamente.</p>
   </div>
 </ion-content>

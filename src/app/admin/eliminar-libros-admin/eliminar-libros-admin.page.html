@@ -3,14 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Eliminar Libros</ion-title>
+    <ion-title>¿Eliminar Libro de Harry Potter?</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   
 <div class="container">
-  <h1>¿Quieres eliminar el libro de Harry Potter?</h1>
   <img src="assets/img/librohp1.webp" alt="...">
   <ion-button color="primary" shape="round"(click)="EliminarLibro()">Aceptar</ion-button>
   <ion-button color="warning" shape="round"[routerLink]="['/editar-borrar-libro-admin']">Cancelar</ion-button>

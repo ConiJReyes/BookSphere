@@ -20,6 +20,16 @@
        <ion-button (click)="AnadiraFavoritos()" style="--background: #dfaa64;" shape="round">Añadir a favoritos</ion-button>
        <ion-button (click)="MarcarLeido()" style="--background: #dfaa64;" shape="round">Marcar Como leído</ion-button>
       </ion-card-header>
+      <ion-card-content>
+        <mat-form-field>
+          <mat-label>Estado Libro</mat-label>
+          <mat-select [(value)]="seleccionado">
+            <mat-option value="leido">Leido</mat-option>
+            <mat-option value="porleer">Por Leer</mat-option>
+            <mat-option value="leyendo">Leyendo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ion-card-content>
      </ion-card>
   </ion-card>
 </ion-content>
