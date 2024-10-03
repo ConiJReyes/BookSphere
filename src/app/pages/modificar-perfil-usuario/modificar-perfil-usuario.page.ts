@@ -23,6 +23,9 @@ export class ModificarPerfilUsuarioPage implements OnInit {
   contraIgual : boolean = false;
   contraMisma : boolean = false
 
+  mostrarContra: boolean = false;
+  mostrarRepetirContra: boolean = false;
+
   constructor(private ToastController:ToastController,private router:Router,private activatedrouter:ActivatedRoute) { 
     this.activatedrouter.queryParams.subscribe((param)=>{
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -44,6 +47,14 @@ export class ModificarPerfilUsuarioPage implements OnInit {
     await toast.present();
   }
 
+  //mostrar contraseñas
+  toggleMostrarContra() {
+    this.mostrarContra = !this.mostrarContra;
+  }
+
+  toggleMostrarRepetirContra() {
+    this.mostrarRepetirContra = !this.mostrarRepetirContra;
+  }
 //
   validarCorreo(email: string){
     const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

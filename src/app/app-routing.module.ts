@@ -88,9 +88,45 @@ const routes: Routes = [
     loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule)
   },
   {
+    path: 'categorias',
+    loadChildren: () => import('./pages/categorias/categorias.module').then( m => m.CategoriasPageModule)
+  },
+  {
+    path: 'comentariolibro',
+    loadChildren: () => import('./pages/comentariolibro/comentariolibro.module').then( m => m.ComentariolibroPageModule)
+  },
+  {
+    path: 'ficcion',
+    loadChildren: () => import('./pages/categorias-de-libros/ficcion/ficcion.module').then( m => m.FiccionPageModule)
+  },
+  {
+    path: 'no-ficcion',
+    loadChildren: () => import('./pages/categorias-de-libros/no-ficcion/no-ficcion.module').then( m => m.NoFiccionPageModule)
+  },
+  {
+    path: 'academicos',
+    loadChildren: () => import('./pages/categorias-de-libros/academicos/academicos.module').then( m => m.AcademicosPageModule)
+  },
+  {
+    path: 'especializados',
+    loadChildren: () => import('./pages/categorias-de-libros/especializados/especializados.module').then( m => m.EspecializadosPageModule)
+  },
+  {
+    path: 'juveniles',
+    loadChildren: () => import('./pages/categorias-de-libros/juveniles/juveniles.module').then( m => m.JuvenilesPageModule)
+  },
+  {
+    path: 'gestion-comentario-libro',
+    loadChildren: () => import('./admin/gestion-comentario-libro/gestion-comentario-libro.module').then( m => m.GestionComentarioLibroPageModule)
+  },
+
+  
+  
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
+
 
 ];
 

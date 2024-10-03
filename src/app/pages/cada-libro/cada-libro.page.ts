@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -13,7 +14,7 @@ export class CadaLibroPage implements OnInit {
 
   cantidadMensajes : number = 0;
 
-  constructor(private menuController : MenuController, private ToastController:ToastController){
+  constructor(private menuController : MenuController, private ToastController:ToastController,private router:Router){
 
     this.menuController.enable(true, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
@@ -53,10 +54,12 @@ export class CadaLibroPage implements OnInit {
       return;
       
     }
-
-
   }
 
+ // redireccionar
+ comentarLibro() {
+  this.router.navigate(['/comentariolibro']); 
+}
 
 
   ngOnInit() {

@@ -14,11 +14,12 @@ export class RegistrarsePage implements OnInit {
   email: string | undefined;
   passwordR: string | undefined;
 
-
   correoValido : boolean = false;
   contraValida : boolean = false;
   contraIgual : boolean = false;
 
+  mostrarContra: boolean = false;
+  mostrarRepetirContra: boolean = false;
 
   // el alertcontroller es para las pantallaz de errores emergentes, bueno no necesariamente de errores
   constructor(
@@ -29,6 +30,15 @@ export class RegistrarsePage implements OnInit {
     this.menuController.enable(false, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
   }
+
+  toggleMostrarContra() {
+    this.mostrarContra = !this.mostrarContra;
+  }
+
+  toggleMostrarRepetirContra() {
+    this.mostrarRepetirContra = !this.mostrarRepetirContra;
+  }
+
 //el metodo crea y muestra una alerta con un mensaje de error en el formulario
   async MostrarAlerta(message: string) {
     const alerta = await this.alertcontroller.create({

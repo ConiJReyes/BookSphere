@@ -20,22 +20,24 @@
           [(ngModel)]="usuario"
           name="usuario"
           placeholder="Ingrese el usuario"
-          
         ></ion-input>
       </ion-item>
 
       <ion-item class="form-item">
+        <ion-label position="floating">Contraseña</ion-label>
         <ion-input
-          label="Contraseña"
-          type="password"
-          labelPlacement="floating"
+          [type]="mostrarContra ? 'text' : 'password'"
           [(ngModel)]="password"
           name="password"
           placeholder="Ingrese la contraseña"
-          
         ></ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglemostrarContra()">
+          <ion-icon [name]="mostrarContra ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
       </ion-item>
 
+
+    <!-- Botón de Inicio de sesión -->
       <ion-button expand="full" style="--background: #dfaa64;" type="submit" (click)="inicioSesion()" shape="round">Iniciar Sesión</ion-button>
     </form>
 

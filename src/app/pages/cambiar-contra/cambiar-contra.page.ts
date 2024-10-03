@@ -12,11 +12,22 @@ export class CambiarContraPage implements OnInit {
   contra : string="";
   repetircontra : string ="";
 
+  mostrarContra: boolean = false;
+  mostrarRepetirContra: boolean = false;
+
   constructor(private router: Router, private menuController: MenuController, private ToastController: ToastController) {
     this.menuController.enable(false, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
   }
 
+  toggleMostrarContra() {
+    this.mostrarContra = !this.mostrarContra;
+  }
+
+  toggleMostrarRepetirContra() {
+    this.mostrarRepetirContra = !this.mostrarRepetirContra;
+  }
+  
   async generarToast(mensaje: string) {
     const toast = await this.ToastController.create({
       message: mensaje,

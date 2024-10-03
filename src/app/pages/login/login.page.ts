@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 
@@ -19,7 +19,8 @@ export class LoginPage implements OnInit {
   usuarioAdmin: string = 'ADMIN';
   passwordAdmin: string = 'admin123';
 
-  
+  mostrarContra = false;
+
 
   constructor(
     private router: Router,
@@ -62,7 +63,7 @@ export class LoginPage implements OnInit {
   //Funcion para iniciar sesion, tiene condiciones para evitar que no se ingresen datos, que los datos sean incorrectos
   //o para entrar como administrador
 
-  
+
   inicioSesion() {
     if (!this.usuario || !this.password) {
       this.MostrarAlerta('Debe ingresar datos');
@@ -78,7 +79,7 @@ export class LoginPage implements OnInit {
       this.password === this.passwordAdmin
     ) {
       this.router.navigate(['/administrador']);
-    } else if(!this.passwordV && !this.usuarioV){
+    } else if (!this.passwordV && !this.usuarioV) {
       this.password = ""
       this.MostrarAlerta('Cree un usuario');
     } else {
@@ -87,16 +88,19 @@ export class LoginPage implements OnInit {
     }
   }
 
-  registrarse(){
+  registrarse() {
     this.usuario = ""
     this.password = ""
     this.router.navigate(['/registrarse'])
   }
 
 
-  recuperarCuenta(){
-      this.router.navigate(['/recuperar-contra'])
+  recuperarCuenta() {
+    this.router.navigate(['/recuperar-contra'])
   }
 
-  ngOnInit() {}
+  togglemostrarContra() {
+    this.mostrarContra = !this.mostrarContra;
+  }
+  ngOnInit() { }
 }

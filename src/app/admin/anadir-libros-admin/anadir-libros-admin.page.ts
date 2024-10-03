@@ -34,13 +34,21 @@ paginasLibAnadir:any=""
 //Funcion para ejecutar el boton
 //creo que hay que validar que en la de paginas sea solo con numeros y no con letras
 AnadirLibro() {
-  if (!this.nomLibAnadir || !this.autorLibAnadir || !this.categoriaLibAnadir || !this.descripcionLibAnadir||!this.paginasLibAnadir) {
+  if (!this.nomLibAnadir || !this.autorLibAnadir || !this.categoriaLibAnadir || !this.descripcionLibAnadir || this.paginasLibAnadir === "") {
     this.generarToast('Todos los campos son obligatorios');
-  } else {
-    this.generarToast('Libro añadido con éxito')
-    this.router.navigate(['/ver-libros-admin'])
+    return;
   }
+
+  // Validacion de numeros de las paginas
+  if (this.paginasLibAnadir <= 0) {
+    this.generarToast('La cantidad de páginas no puede ser menor o igual a 0');
+    return;
+  }
+
+  this.generarToast('Libro añadido con éxito');
+  this.router.navigate(['/ver-libros-admin']);
 }
+
 
   ngOnInit() {
   }
