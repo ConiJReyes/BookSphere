@@ -27,9 +27,8 @@ export class ComentariolibroPage implements OnInit {
       await this.presentToast('Por favor, ingresa una opinión.');
     } else {
       console.log('Opinión enviada:', this.opinion);
-      // Aquí puedes agregar lógica para guardar la opinión
       await this.presentToast('Opinión enviada con éxito.');
-      this.opinion = ''; // Limpia el campo después de enviar
+      this.opinion = ''; 
     }
   }
 
@@ -38,9 +37,8 @@ export class ComentariolibroPage implements OnInit {
       await this.presentToast('Por favor, ingresa al menos una frase.');
     } else {
       console.log('Frases enviadas:', this.frases);
-      // Aquí puedes agregar lógica para guardar las frases
       await this.presentToast('Frases enviadas con éxito.');
-      this.frases = ''; // Limpia el campo después de enviar
+      this.frases = ''; 
     }
   }
 
