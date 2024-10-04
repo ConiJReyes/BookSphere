@@ -1,0 +1,22 @@
+.container {
+    padding: 16px; 
+  }
+  
+  .custom-card {
+    background-color: #f2dcb3; 
+    border-radius: 20px; 
+    margin-bottom: 16px; 
+  }
+  
+  ion-card {
+    --box-shadow: none;
+  }
+  
+  ion-textarea {
+    min-height: 100px; 
+  }
+  
+  ion-card-title{
+    color: #6D4C41;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }

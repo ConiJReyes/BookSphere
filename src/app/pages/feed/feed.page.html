@@ -1,0 +1,74 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title></ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <ion-searchbar placeholder="Buscar por Título, Autor, ISBN" color="dark">
+    </ion-searchbar>
+    
+
+    <!-- Sección de Mis Libros -->
+    <ion-text color="primary">
+      <h2>Mis libros</h2>
+    </ion-text>
+    <ion-grid>
+      <ion-row [routerLink]="['/cada-libro']">
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp1.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp2.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp3.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Sección de Libros Populares -->
+    <ion-text color="primary">
+      <h2>Libros populares</h2>
+    </ion-text>
+    <ion-grid>
+      <ion-row [routerLink]="['/cada-libro']">
+        <ion-col size="4">
+          <ion-img src="assets/img/romperelcirculo.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/alasdesangre.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/tanpocavida.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Sección de Categoría de Libros -->
+    <ion-text color="primary">
+      
+        <h2>Libros en estreno</h2>
+      
+    </ion-text>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          
+          <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          
+          <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          
+          <ion-img src="assets/img/mesaparados.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</div>
