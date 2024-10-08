@@ -1,0 +1,57 @@
+.info-card {
+  width: 95%; /* ancho */
+  background-color: #f2dcb3; /* Fondo del card */
+  border-radius: 10px; 
+  padding: 10px; 
+}
+
+.portada-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.portada-img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px; 
+}
+
+.actualizacionlibro {
+  background-color: #f3dcb3; 
+  padding: 20px; 
+  border-radius: 10px; 
+  margin: 20px;
+
+  ion-card {
+    padding: 10px;
+    background-color: #f2dcb3; 
+  }
+  
+  .progreso-container {
+    display: flex;
+    align-items: center;
+    
+    ion-input {
+      width: 50%; 
+      margin-right: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      background-color: #f3dcb3;
+
+    }
+    
+  }
+
+  .custom-card {
+    margin-top: 10px; 
+    background-color: #ffffff; 
+    border-radius: 10px;
+  }
+
+  .custom-button {
+    background-color: #4a5568; 
+    color: white; 
+    border-radius: 5px; 
+  }
+}

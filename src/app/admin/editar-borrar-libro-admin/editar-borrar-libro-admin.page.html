@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="1" *ngFor="let libro of Libros" >
+        <ion-card>
+          <ion-card-header>
+            <img [src]="libro.imagen" alt="{{ libro.titulo }}" class="portada-centrada" />
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-title>{{ libro.titulo }}</ion-card-title>
+            <p>{{ libro.autor }}</p>
+          </ion-card-content>
+          <div class="boton-centrado">
+            <ion-button color="primary" shape="round" [routerLink]="['/editar-libros-admin']">Editar Libro</ion-button>
+            <ion-button color="danger" shape="round" [routerLink]="['/eliminar-libros-admin']">Eliminar Libro</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Libros </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="container">
+    <ion-label>Editar Libro Libro</ion-label>
+    <ion-item>
+      <ion-input [(ngModel)]="nomLibro" label="Nombre Libro"  labelPlacement="floating"
+      placeholder="Ingrese el nombre del libro" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="autorLibro" label="Autor" labelPlacement="floating"
+      placeholder="Ingrese el nombre del autor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="categoriaLibro" label="Categoria" labelPlacement="floating"
+      placeholder="Ingrese el tipo de categoria" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea [(ngModel)]="descripcionLibro" class="input-desc" label="Descripción" labelPlacement="floating"></ion-textarea>
+    </ion-item>
+    <ion-button  color="primary" type="submit" shape="round" (click)="EditarLibros()">Actualizar Libro</ion-button>
+
+  </div>
+
+</ion-content>

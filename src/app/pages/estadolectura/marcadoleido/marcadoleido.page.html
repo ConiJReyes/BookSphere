@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Libro Leído</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="portada-container">
+    <ion-img [src]="libro.imagen" class="portada-img"></ion-img>
+  </div>
+
+  <ion-card class="info-card">
+    <ion-card-content>
+      <h6>{{ libro.titulo }}</h6>
+      <p>{{ libro.autor }} | {{ libro.genero }} | {{ libro.paginas }} páginas </p>
+      <p>ISBN: {{ libro.ISBN }} </p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <div class="sinopsislibro">
+    <ion-card>
+      <ion-card-content>
+        <p>{{ libro.sinopsis }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="calificarestrellas">
+    <div class="calificar-column">
+      <ion-icon name="star-outline" (click)="calificarlib(1)" [color]="calificar >= 1 ? 'warning' : ''"></ion-icon>
+      <ion-icon name="star-outline" (click)="calificarlib(2)" [color]="calificar >= 2 ? 'warning' : ''"></ion-icon>
+      <ion-icon name="star-outline" (click)="calificarlib(3)" [color]="calificar >= 3 ? 'warning' : ''"></ion-icon>
+      <ion-icon name="star-outline" (click)="calificarlib(4)" [color]="calificar >= 4 ? 'warning' : ''"></ion-icon>
+      <ion-icon name="star-outline" (click)="calificarlib(5)" [color]="calificar >= 5 ? 'warning' : ''"></ion-icon>
+    </div>
+  </div>
+
+
+  <!-- Opinión del libro -->
+  <div class="opinion-section">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Opinión de este libro</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-textarea [(ngModel)]="opinion" name="opinion" [autoGrow]="true" class="small-textarea"></ion-textarea>
+        </ion-item>
+        <ion-button (click)="EnviarOpinion()" size="small" expand="block" class="custom-button">Enviar Opinión</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Botón para ir a perfil usuario -->
+  <div class="perfil-button-container">
+    <ion-button routerLink="/perfilusuario" expand="full" class="custom-button perfil-button">
+      Ir a Perfil de Usuario
+    </ion-button>
+  </div>
+  
+</ion-content>

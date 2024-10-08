@@ -1,0 +1,89 @@
+.portada-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.portada-img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.calificarestrellas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.calificar-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.sinopsislibro {
+  padding: 10px;
+  border-radius: 8px;
+
+  .sinopsislibro ion-card {
+    background: transparent;
+  }
+
+  ion-item {
+    margin-top: 10px;
+    --background: #e4e7eb;
+    --color: #4a5568;
+  }
+
+  ion-select {
+    --padding-start: 10px;
+    --placeholder-color: #718096;
+  }
+}
+
+.info-card {
+  width: 95%;
+  background-color: #f2dcb3;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.opinion-section {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.opinion-section ion-card {
+  --background: #f2dcb3;
+}
+
+.opinion-section ion-textarea {
+  --background: #f2dcb3;
+  --color: #4a5568;
+}
+
+.opinion-section ion-button.custom-button {
+  --background: #bf6734;
+  --color: #ffffff;
+  --border-radius: 5px;
+  --padding: 10px;
+}
+
+.opinion-section ion-button.custom-button:hover {
+  --background: #e5b060;
+}
+
+.perfil-button-container {
+  padding: 10px; 
+  margin-top: 20px; 
+}
+
+.custom-button {
+  --background: #bf6734; 
+  --color: white; 
+  border-radius: 8px; 
+}
