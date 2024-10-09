@@ -1,0 +1,22 @@
+ion-card {
+    margin: 10px;
+  }
+  
+  ion-list {
+    margin: 10px;
+  }
+  
+  ion-item {
+    cursor: pointer; /* Cambia el cursor al pasar sobre un usuario */
+  }
+  
+  ion-button {
+    margin-top: 20px; /* Espacio para el botón */
+  }
+  
+  .usuario-card {
+    position: fixed;
+    bottom: 20px; /* Ajusta la posición según tus necesidades */
+    width: 250px; /* Ajusta el ancho del card */
+    z-index: 1000; /* Ajusta el ancho del card si es necesario */
+  }

@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Leyendo Libro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="portada-container">
+    <ion-img [src]="libro.imagen" class="portada-img"></ion-img>
+  </div>
+
+  <ion-card class="info-card">
+    <ion-card-content>
+      <h6>{{ libro.titulo }}</h6>
+      <p>{{ libro.autor }} | {{ libro.genero }} | {{ libro.paginas }} páginas </p>
+      <p>ISBN: {{ libro.ISBN }} </p>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  <div class="actualizacionlibro">
+    <ion-card>
+      <p>Progreso de Lectura</p>
+      <!-- Input para el progreso de lectura -->
+      <div class="progreso-container">
+        <ion-input type="number" [(ngModel)]="paginasLeidas" placeholder="Páginas leídas" min="0" [max]="libro.paginas"
+          (ionChange)="validarProgreso()">
+        </ion-input>
+        <p>/{{ libro.paginas }} páginas</p>
+      </div>
+
+
+      <h6>Frases que me gustan</h6>
+      <ion-item slot="header" color="light">
+        <ion-label>Frases del libro que me gustaron</ion-label>
+      </ion-item>
+      <ion-card class="custom-card">
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-textarea [(ngModel)]="frases" name="frases" [autoGrow]="true" class="small-textarea"></ion-textarea>
+          </ion-item>
+          <ion-button (click)="EnviarFrases()" size="small" expand="block" class="custom-button">Enviar
+            Frase</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-card>
+  </div>
+
+
+</ion-content>

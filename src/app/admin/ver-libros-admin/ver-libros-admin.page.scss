@@ -1,0 +1,33 @@
+.eliminar{
+  position: fixed; /* Para mantener la card siempre en su posición */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Asegurar que esté exactamente en el centro */
+  
+  width: 80%; /* Ajusta el ancho según lo que necesites */
+  max-width: 500px; /* Máximo ancho para pantallas grandes */
+  padding: 20px; /* Espaciado interno */
+  
+  background-color: white; /* Color de fondo */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para que esté por encima */
+  
+  z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.editar{
+  position: fixed; /* Para mantener la card siempre en su posición */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Asegurar que esté exactamente en el centro */
+  
+  width: 80%; /* Ajusta el ancho según lo que necesites */
+  max-width: 500px; /* Máximo ancho para pantallas grandes */
+  padding: 20px; /* Espaciado interno */
+  
+  background-color: white; /* Color de fondo */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para que esté por encima */
+  
+  z-index: 9999; /* Asegura que esté por encima de todo */
+}

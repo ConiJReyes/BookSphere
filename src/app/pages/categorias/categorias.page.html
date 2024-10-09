@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Categorías</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <!-- Sección de Categorias -->
+  <section>
+      <ion-text color="primary">
+        <h2 (click)="irAFiccion()" style="cursor: pointer;">
+          Libros de Ficción
+        </h2>
+      </ion-text>
+    <!--VISTA DE ALGUNOS LIBROS-->
+    <ion-grid>
+      <ion-row [routerLink]="['/cada-libro']">
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp1.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp2.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/librohp3.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <!-- Sección de Libros No ficcion -->
+  <section>
+    <ion-text color="primary">
+      <h2 (click)="irAnoFiccion()" style="cursor: pointer;">
+        Libros No Ficción
+      </h2>
+    </ion-text>
+    <!--VISTA DE ALGUNOS LIBROS-->
+    <ion-grid>
+      <ion-row [routerLink]="['/cada-libro']">
+        <ion-col size="4">
+          <ion-img src="assets/img/romperelcirculo.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/alasdesangre.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/tanpocavida.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <!-- Sección de Libros Juveniles -->
+  <section>
+    <ion-text color="primary">
+      <h2 (click)="irJuveniles()" style="cursor: pointer;">
+        Libros Juveniles
+      </h2>
+    </ion-text>
+        <!--VISTA DE ALGUNOS LIBROS-->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/mesaparados.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+    <!-- Sección de Libros Academicos -->
+    <section>
+      <ion-text color="primary">
+        <h2 (click)=" irAcademicos()" style="cursor: pointer;">
+          Libros Academicos
+        </h2>
+      </ion-text>
+          <!--VISTA DE ALGUNOS LIBROS-->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-img src="assets/img/mesaparados.webp"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+
+      <!-- Sección de Libros Especializados -->
+  <section>
+    <ion-text color="primary">
+      <h2 (click)="irEspecializados()" style="cursor: pointer;">
+        Libros Especializados
+      </h2>
+    </ion-text>
+        <!--VISTA DE ALGUNOS LIBROS-->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
+        </ion-col>
+        <ion-col size="4">
+          <ion-img src="assets/img/mesaparados.webp"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+
+</ion-content>

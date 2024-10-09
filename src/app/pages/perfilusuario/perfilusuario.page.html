@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <img class="img-perfil"src="assets/img/usuario.png" alt="...">
+    <h2>{{usuario | uppercase }}</h2>
+    <p>{{email | uppercase}}
+    </p>
+    <ion-button style="--background: #dfaa64;" (click)="irModificarPerfil()">
+      <ion-icon name="pencil" slot="start"></ion-icon>
+      Modificar
+    </ion-button>
+  </div>
+  <div>
+    <h1>Libros Favoritos</h1>
+    <div class="container2">
+      <div class="row">
+        <div class="col">
+          <ion-card [routerLink]="['/detalleslibro']">
+            <img class="img-libros" [src]="Libro1.imagen" alt="">
+            <ion-card-header>{{Libro1.titulo}}</ion-card-header>
+            <ion-card-content>
+              <p>{{Libro1.autor}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div class="col">
+          <ion-card [routerLink]="['/detalleslibro']">
+            <img class="img-libros" [src]="Libro2.imagen" alt="">
+            <ion-card-header>{{Libro2.titulo}}</ion-card-header>
+            <ion-card-content>
+              <p>{{Libro2.autor}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col">
+          <ion-card [routerLink]="['/detalleslibro']">
+            <img class="img-libros" [src]="Libro3.imagen" alt="">
+            <ion-card-header>{{Libro3.titulo}}</ion-card-header>
+            <ion-card-content>
+              <p>{{Libro3.autor}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div class="col">
+          <ion-card *ngIf="Libro4" [routerLink]="['/detalleslibros']">
+            <img class="img-libros" [src]="Libro4.imagen" alt="">
+            <ion-card-header>{{Libro4.titulo}}</ion-card-header>
+            <ion-card-content>
+              <p>{{Libro4.autor}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</ion-content>
+<!-- <ion-item lines="none">
+    
+  <ion-label>
+    <h2>{{ usuario}}</h2>
+    <p>{{ email }}</p>
+    <ion-button fill="clear" color="primary" [routerLink]="['/modificar-perfil-usuario']">
+      <ion-icon name="pencil" slot="start"></ion-icon>
+      Modificar
+    </ion-button>
+  </ion-label>
+</ion-item> -->

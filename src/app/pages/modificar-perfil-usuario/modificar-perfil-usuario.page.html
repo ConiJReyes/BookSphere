@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="container">
+
+    <h1>Modificar Usuario</h1>
+
+    <form>
+      <ion-item class="form-item">
+        <ion-input
+          label="Usuario"
+          labelPlacement="floating"
+          [(ngModel)]="usuario"
+          name="username"
+          placeholder="Ingrese el usuario"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-item class="form-item">
+        <ion-input
+          label="Correo"
+          labelPlacement="floating"
+          [(ngModel)]="correo"
+          name="email"
+          placeholder="Ingrese correo"
+          
+        ></ion-input>
+      </ion-item>
+  
+      <ion-item class="form-item">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          [type]="mostrarContra ? 'text' : 'password'"
+          [(ngModel)]="contrasena"
+          name="password"
+          labelPlacement="floating"
+          placeholder="Ingrese la nueva contraseña"
+        ><ion-button fill="clear" slot="end" (click)="toggleMostrarContra()">
+          <ion-icon [name]="mostrarContra ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-input> 
+      </ion-item>
+      
+      <ion-item class="form-item">
+        <ion-label position="floating">Repetir Contraseña</ion-label>
+        <ion-input
+          [type]="mostrarRepetirContra ? 'text' : 'password'"
+          [(ngModel)]="contrasenaR"
+          name="passwordR"
+          labelPlacement="floating"
+          placeholder="Repita la nueva contraseña"
+        >
+        <ion-button fill="clear" slot="end" (click)="toggleMostrarRepetirContra()">
+          <ion-icon [name]="mostrarRepetirContra ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-input>
+      </ion-item>
+      
+  
+      <ion-button
+        shape="round"
+        expand="full"
+        style="--background: #dfaa64;"
+        type="submit"
+        (click)="ModificarPerfil()"
+        >Cambiar</ion-button
+      >
+      
+    </form>
+    <div class="container-p">
+      <p *ngIf="correoValido">-Ingrese un correo válido</p>
+      <p *ngIf="contraValida">-La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.</p>
+      <p *ngIf="contraIgual">-Las contraseñas no coinciden, intentelo nuevamente.</p>
+      <p *ngIf="contraMisma">-No puede usar datos de su usuario anterior</p>
+    </div>
+  </div>
+</ion-content>

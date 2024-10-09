@@ -1,0 +1,54 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Gestionar Usuarios</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Gestión de Usuarios</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <!-- Lista de Usuarios -->
+    <ion-list>
+      <ion-item *ngFor="let x of arregloUsuarios" (click)="seleccionarUsuario(x)">
+        <ion-label>
+          <p>{{x.id_usuario}}</p>
+          <h2>{{x.username }}</h2>
+          <p>{{x.correo_user }}</p>
+          <p>{{x.id_rol === 1 ? 'Administrador' : x.id_rol === 2 ? 'Usuario' : 'Desconocido'}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Detalles del Usuario Seleccionado -->
+    <ion-card *ngIf="usuarioSeleccionado" class="usuario-card"  >
+      <ion-card-header>
+        <ion-card-title>Detalles de {{ usuarioSeleccionado.username }}</ion-card-title>
+        <ion-button fill="clear" (click)="cerrarDetalles()">Cerrar</ion-button>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Correo:</strong> {{ usuarioSeleccionado.correo_user }}</p>
+    
+        <ion-item>
+          <ion-label position="floating">Nuevo Nombre de Usuario</ion-label>
+          <ion-input [(ngModel)]="usuarioSeleccionado.username"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating">Nuevo Correo</ion-label>
+          <ion-input [(ngModel)]="usuarioSeleccionado.correo_user"></ion-input>
+        </ion-item>
+    
+        <ion-button expand ="full" (click)="guardarCambios()">Guardar Cambios</ion-button>
+        <ion-button expand ="full" (click)="eliminarUsuario()">Eliminar Usuario</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>
