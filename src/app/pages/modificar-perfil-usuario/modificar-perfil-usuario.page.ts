@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { CameraService } from 'src/app/services/camera.service';
+import { DBserviceService } from 'src/app/services/dbservice.service';
 import { ToastsService } from 'src/app/services/toasts.service';
+import { ValidationsService } from 'src/app/services/validations.service';
 
 @Component({
   selector: 'app-modificar-perfil-usuario',
@@ -10,14 +14,20 @@ import { ToastsService } from 'src/app/services/toasts.service';
 })
 export class ModificarPerfilUsuarioPage implements OnInit {
 //variables
-  usuario:string=""
-  correo:string=""
-  contrasena: string=""
-  contrasenaR:string=""
 
-  usuarioval:string=""
-  correoval:string=""
-  contrasenaval:string=""
+  idUsuario! : number
+
+  usuario : any = {
+    username : '',
+    correo: '',
+    foto_perfil : ''
+  }
+
+
+  contrasena! : string
+  contrasenaR!: string
+
+
 
   correoValido : boolean = false;
   contraValida : boolean = false;
@@ -27,23 +37,39 @@ export class ModificarPerfilUsuarioPage implements OnInit {
   mostrarContra: boolean = false;
   mostrarRepetirContra: boolean = false;
 
-  constructor(private toast : ToastsService,private router:Router,private activatedrouter:ActivatedRoute, private menu : MenuController) { 
+  constructor(private toast : ToastsService,private router:Router,private activatedrouter:ActivatedRoute, private menu : MenuController, private validation : ValidationsService, private bd : DBserviceService, private camera: CameraService, private alerta: AlertsService) { 
     
     this.menu.enable(true,"MenuPrincipal");
     this.menu.enable(false, "MenuAdministrador");
 
     this.activatedrouter.queryParams.subscribe((param)=>{
-      if (this.router.getCurrentNavigation()?.extras.state) {
-        this.usuarioval =
-          this.router.getCurrentNavigation()?.extras?.state?.['usuarioEnvio'];
-        this.correoval =
-          this.router.getCurrentNavigation()?.extras?.state?.['emailEnvio'];
-        this.contrasenaval =
-          this.router.getCurrentNavigation()?.extras?.state?.['passwodEnvio'];
+      if (this.router.getCurrentNavigation()?.extras.state){
+       this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['usuarioSeleccionado'] 
+
       }
     })
+   
   }
 
+
+   async ingresarImagen(){
+     try{
+      const resultado = await this.camera.tomarFoto();
+      if(resultado){
+          this.usuario.foto_perfil = resultado
+       this.toast.GenerarToast('Imagen añadida correctamente',2000,'bottom')
+      }else{
+       this.toast.GenerarToast('No se pudo obtener la imagen.',2000,'bottom')
+      }
+     }catch(error : any){
+       if (error === 'User cancelled photos app'|| error.message === 'User cancelled photos app'){
+         return
+       }else{
+         this.alerta.GenerarAlerta('Error','Error con ingresar Imagen'+ error) 
+       }
+      
+     }
+   }
 
   //mostrar contraseñas
   toggleMostrarContra() {
@@ -54,21 +80,18 @@ export class ModificarPerfilUsuarioPage implements OnInit {
     this.mostrarRepetirContra = !this.mostrarRepetirContra;
   }
 //
-  validarCorreo(email: string){
-    const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return patron.test(email);
-  }
-//
-  validarContrasena(password: string) {
-    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*_?&])[A-Za-z\d@#$!%*_?&]{8,}$/;
-    return patron.test(password);
-  }
-
 
 
 ModificarPerfil(){
   //Si hay algun campo vacio pide que se llenen todos o no saldran otras alertas
-  if (!this.usuario||!this.correo||!this.contrasena||!this.contrasenaR) {
+
+  const usuarioLimpio = this.usuario.username.trim()
+  const correoLimpio = this.usuario.correo_user.trim()
+  const contraLimpia = this.contrasena.trim()
+  const contralimpiraR = this.contrasenaR.trim()
+
+
+  if (!usuarioLimpio||!correoLimpio||!contraLimpia||!contralimpiraR) {
     this.toast.GenerarToast('Debe ingresar todos los campos',5000,"bottom")
     return;
   }
@@ -76,37 +99,43 @@ ModificarPerfil(){
   this.correoValido = false;
   this.contraValida = false;
   this.contraIgual = false;
-  this.contraMisma = false;
 
   // Validar correo
-  if (!this.validarCorreo(this.correo)) {
+  if (!this.validation.validarCorreo(correoLimpio)) {
     this.correoValido = true;
   }
 
   // Validar formato de la contraseña
-  if (!this.validarContrasena(this.contrasena) || !this.validarContrasena(this.contrasenaR)) {
+  if (!this.validation.validarContrasena(contraLimpia) || !this.validation.validarContrasena(contralimpiraR)) {
     this.contraValida = true;
   }
 
   // Verificar si las contraseñas coinciden
-  if (this.contrasena !== this.contrasenaR) {
+  if (contraLimpia !== contralimpiraR) {
     this.contraIgual = true;
   }
 
-  if(this.usuario===this.usuarioval || this.contrasena === this.contrasenaval || this.correo === this.correoval || this.contrasenaval===this.contrasenaR){
-    this.contraMisma = true;
-  }
-
   // Si alguna validación falló, no continuar con el registro
-  if (this.correoValido || this.contraValida || this.contraIgual || this.contraMisma) {
+  if (this.correoValido || this.contraValida || this.contraIgual) {
     return;
   }
-    this.toast.GenerarToast('Usuario Modificado correctamente',5000,"bottom");
-    this.router.navigate(['/perfilusuario'])
+    this.bd.modificarUsuario(usuarioLimpio,correoLimpio,contraLimpia,this.usuario.foto_perfil,this.idUsuario).then(()=>{
+      this.bd.traerUsuarioLogueado(this.idUsuario); // Emitir el cambio
+      this.router.navigate(['/perfilusuario']);
+    })
+    
   }
 
 
   ngOnInit() {
+    
+    if (this.idUsuario) {
+      this.bd.traerUsuarioLogueado(this.idUsuario)
+      this.bd.fetchUsuarioPerfil().subscribe(data=>{
+        if(data){
+          this.usuario = data     
+        }
+      })
+    }
   }
-
 }

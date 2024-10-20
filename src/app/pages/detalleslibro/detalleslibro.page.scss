@@ -5,8 +5,9 @@
   }
   
   .portada-img {
-    width: 80%;
-    height: auto;
+    width: 150px; /* Ancho fijo para la imagen */
+    height: 220px; /* Alto fijo para la imagen */
+    object-fit: cover; /* Mantiene la proporción de la imagen y corta lo que sobrepase el contenedor */
     border-radius: 10px; 
   }
   .left-column,
@@ -23,8 +24,20 @@
     font-size: 30px;
     padding: 0 5px;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: center; 
+    padding: 10px; 
+  }
+  
   .custom-button {
     --background: #dfaa64; 
+    --color: #ffffff; 
+    --border-radius: 12px; 
+    --padding: 10px 20px; 
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    --background-activated: #bf8a45; 
   }
   
   .custom-card {
@@ -34,7 +47,7 @@
   }
   
   .small-textarea {
-    height: 100px; /* Ajustar según sea necesario */
+    height: 100px; 
   }
   
   .info-card {
@@ -57,8 +70,6 @@
     margin: 4px 0;
   }
   
-
-
   .sinopsislibro {
     ion-item {
       margin-top: 10px;
@@ -71,4 +82,10 @@
       --placeholder-color: #718096;
     }
   }
-  
+
+  .descripcion-libro-api{
+    width: 95%; 
+    background-color: #f2dcb3; 
+    border-radius: 10px; 
+    padding: 10px; 
+}

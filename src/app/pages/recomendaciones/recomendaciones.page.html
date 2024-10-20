@@ -12,12 +12,12 @@
 
     
     <ion-item>
-      <ion-input [(ngModel)]="recomendacion" label="¿Qué nos recomienda?"  labelPlacement="floating"
+      <ion-input [(ngModel)]="Titulo_recomendacion" label="¿Qué nos recomienda?"  labelPlacement="floating"
       placeholder="...."></ion-input>
     </ion-item>
     <ion-item>
     
-      <ion-textarea class="input-desc" label="Descripción" labelPlacement="floating"
+      <ion-textarea [(ngModel)]="recomendacion" class="input-desc" label="Descripción" labelPlacement="floating"
       placeholder="Ingrese una descripción"></ion-textarea>
     </ion-item>
     <ion-button style="--background: #dfaa64;" shape="round" (click)="EnviarRecomendacion()">Enviar Recomendación</ion-button>

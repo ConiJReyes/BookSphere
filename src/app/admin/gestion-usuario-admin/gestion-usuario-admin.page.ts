@@ -54,6 +54,7 @@ export class GestionUsuarioAdminPage implements OnInit {
         this.alerta.GenerarAlerta('Aviso','No se puede eliminar un rol de Administrador')
       }else{
         this.bd.eliminarUsuario(id);
+        this.cerrarDetalles();
       }
     }
   }

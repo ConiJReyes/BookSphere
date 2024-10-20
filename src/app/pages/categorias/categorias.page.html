@@ -8,121 +8,84 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  
-  <!-- Sección de Categorias -->
-  <section>
-      <ion-text color="primary">
-        <h2 (click)="irAFiccion()" style="cursor: pointer;">
-          Libros de Ficción
-        </h2>
-      </ion-text>
-    <!--VISTA DE ALGUNOS LIBROS-->
-    <ion-grid>
-      <ion-row [routerLink]="['/cada-libro']">
-        <ion-col size="4">
-          <ion-img src="assets/img/librohp1.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/librohp2.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/librohp3.webp"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+ 
+  <h2 (click)="irTodosLosLibros(1)">Libros de Ficción</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosFiccion">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <!-- Sección de Libros No ficcion -->
-  <section>
-    <ion-text color="primary">
-      <h2 (click)="irAnoFiccion()" style="cursor: pointer;">
-        Libros No Ficción
-      </h2>
-    </ion-text>
-    <!--VISTA DE ALGUNOS LIBROS-->
-    <ion-grid>
-      <ion-row [routerLink]="['/cada-libro']">
-        <ion-col size="4">
-          <ion-img src="assets/img/romperelcirculo.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/alasdesangre.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/tanpocavida.webp"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+  <!-- Categoría: Libros de No Ficción -->
+  <h2 (click)="irTodosLosLibros(2)">Libros No Ficción</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosNoFiccion">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <!-- Sección de Libros Juveniles -->
-  <section>
-    <ion-text color="primary">
-      <h2 (click)="irJuveniles()" style="cursor: pointer;">
-        Libros Juveniles
-      </h2>
-    </ion-text>
-        <!--VISTA DE ALGUNOS LIBROS-->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/mesaparados.webp"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+  <!-- Categoría: Libros Juveniles -->
+  <h2 (click)="irTodosLosLibros(3)">Libros Juveniles</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosJuveniles">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <!-- Sección de Libros Academicos -->
-    <section>
-      <ion-text color="primary">
-        <h2 (click)=" irAcademicos()" style="cursor: pointer;">
-          Libros Academicos
-        </h2>
-      </ion-text>
-          <!--VISTA DE ALGUNOS LIBROS-->
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4">
-            <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
-          </ion-col>
-          <ion-col size="4">
-            <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
-          </ion-col>
-          <ion-col size="4">
-            <ion-img src="assets/img/mesaparados.webp"></ion-img>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </section>
+  <h2 (click)="irTodosLosLibros(4)">Libros Académicos</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosAcademicos">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      <!-- Sección de Libros Especializados -->
-  <section>
-    <ion-text color="primary">
-      <h2 (click)="irEspecializados()" style="cursor: pointer;">
-        Libros Especializados
-      </h2>
-    </ion-text>
-        <!--VISTA DE ALGUNOS LIBROS-->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-img src="assets/img/Elmejorlibrodelmundo.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/quedaraelamor.webp"></ion-img>
-        </ion-col>
-        <ion-col size="4">
-          <ion-img src="assets/img/mesaparados.webp"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+  <h2 (click)="irTodosLosLibros(5)">Libros Especializados</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosEspecializados">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <h2 (click)="irTodosLosLibros(6)">Libros Comedia</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosComedia">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <h2 (click)="irTodosLosLibros(7)">Libros Terror</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let libro of librosTerror">
+        <ion-card (click)="irLibro(libro)">
+          <img [src]="libro.portada">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

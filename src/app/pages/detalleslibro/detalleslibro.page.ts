@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { AlertController, MenuController } from '@ionic/angular';
+import { DBserviceService } from 'src/app/services/dbservice.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 
 @Component({
@@ -10,69 +12,64 @@ import { ToastsService } from 'src/app/services/toasts.service';
 })
 export class DetalleslibroPage implements OnInit {
 
-  seleccionado: string = "Leido";
-  libro: any = { titulo: 'Harry Potter y la piedra filosofal', autor: 'J.K. Rowling', paginas: 333, imagen: 'assets/img/librohp1.webp', sinopsis: 'Harry Potter es un niño huérfano que vive con sus crueles tíos. En su undécimo cumpleaños, descubre que es un mago y ha sido aceptado en el Colegio Hogwarts de Magia. Allí, hace amigos como Ron y Hermione y se entera de su pasado: sobrevivió al ataque del malvado Lord Voldemort.', genero: 'Ficcion', ISBN: '978-0439708180' }
+  libro : any;
+  apiService: any;
 
-  cantidadMensajes: number = 0;
+  constructor(private menuController: MenuController, private toast: ToastsService, private activatedRouter: ActivatedRoute, private route : Router, private storage : NativeStorage, private bd: DBserviceService, ) {
 
-  //ESTADO DE LECTURA
-  estadoLibro: string='';
-
-  constructor(private menuController: MenuController, private toast: ToastsService, private router: Router,private alertController:AlertController) {
+    this.activatedRouter.queryParams.subscribe(params=>{
+      if(this.route.getCurrentNavigation()?.extras.state){
+        this.libro = this.route.getCurrentNavigation()?.extras.state?.['libroSeleccionado']
+      }
+    })
 
     this.menuController.enable(true, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
   }
 
-  //mostrar anuncio
-  AnadiraFavoritos() {
-    this.toast.GenerarToast('Añadido con éxito', 2000, "top");
-  }
 
-  cambiarEstadoLibro() {
-    switch (this.estadoLibro) {
-      case 'leido':
-        console.log('El libro ha sido marcado como Leído.');
-        this.marcarComoLeido();
-        break;
-      case 'leyendo':
-        console.log('El libro está en progreso (Leyendo).');
-        this.marcarComoLeyendo();
-        break;
-      case 'quieroleer':
-        console.log('El libro ha sido marcado como Quiero Leer.');
-        this.marcarComoQuieroLeer();
-        break;
-      default:
-        console.log('Selecciona un estado.');
-    }
-  }
-
-  marcarComoLeido() {
-    this.router.navigate(['/marcadoleido']);
-  }
-
-  marcarComoLeyendo() {
-    this.router.navigate(['/marcadoleyendo']);
-  }
-
-  marcarComoQuieroLeer() {
-    // Muestra un mensaje de alerta
-    this.alertController.create({
-      message: 'Agregado a "Quiero leer" con éxito',
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => {
-          this.router.navigate(['/perfilusuario']); // 
-        }
-      }]
-    }).then(alert => alert.present());
+  async anadirGuardados() {
+    await this.storage.getItem('usuario_iniciado').then(async id => {
+      // Verificar si el libro ya ha sido guardado en favoritos
+      const libroGuardado = await this.bd.verificarLibroGuardado(id, this.libro.ISBN);
+      if (libroGuardado) {
+        // Si el libro ya está guardado, muestra un mensaje
+        this.toast.GenerarToast('El libro ya ha sido añadido a favoritos', 3000, 'bottom');
+      } else {
+        // Si no está guardado, se añade
+        this.bd.guardarLibrosPerfil(id, this.libro.ISBN).then(() => {
+          this.toast.GenerarToast('Libro guardado con éxito en el Perfil', 3000, 'bottom');
+          this.route.navigate(['/feed']);
+        });
+      }
+    }).catch(e => {
+      console.error("Error al añadir el libro a guardados:", e);
+    });
   }
   
-  // redireccionar
-  comentarLibro() {
-    this.router.navigate(['/comentariolibro']);
-  }
+  
+  cargarLibros(query: string) {
+    this.apiService.buscarLibros(query, 'es').subscribe((response: any) => {
+      if (response.items) {
+        const nuevosLibros = response.items.map((item: any) => ({
+          titulo: item.volumeInfo.title,
+          autor: item.volumeInfo.authors?.join(', '),
+          ISBN: item.volumeInfo.industryIdentifiers?.[0]?.identifier || 'N/A',
+          imagen: item.volumeInfo.imageLinks?.thumbnail || '', 
+          nombre_categoria: item.volumeInfo.categories?.join(', ') || 'Sin categoría',
+          paginas: item.volumeInfo.pageCount || 0,
+          descripcion: item.volumeInfo.description || 'Sin descripción'
+        }));
+
+        this.libro = this.libro.concat(nuevosLibros);
+      } else {
+        console.warn('No se encontraron libros para la consulta:', query);
+      }
+    }, (error: any) => {
+      console.error('Error al cargar libros:', error);
+    });
+}
+
 
   ngOnInit() {
   }

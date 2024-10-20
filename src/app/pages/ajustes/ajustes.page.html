@@ -11,12 +11,13 @@
   <div class="container">
     <ion-list>
       <ion-item>
-        <ion-toggle>Modo Oscuro</ion-toggle><br /><br />
+        <ion-toggle (ionChange)="mostrarNotifications($event)">Notificaciones</ion-toggle><br /><br />
       </ion-item>
       <ion-item>
-        <ion-toggle>Notificaciones</ion-toggle><br /><br />
+        <ion-button (click)="cerrarSesion()">Cerrar Sesión<ion-icon slot="start" name="exit-outline"></ion-icon></ion-button>
       </ion-item>
     </ion-list>
   </div>
 </ion-content>
+
 

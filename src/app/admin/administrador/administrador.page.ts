@@ -11,7 +11,7 @@ export class AdministradorPage implements OnInit {
 
   
 
-  constructor(private menuController: MenuController ) {
+  constructor(private menuController: MenuController , private bd :DBserviceService) {
     
     // CONFIGURACIONES MENU
         this.menuController.enable(true, 'MenuAdministrador');
@@ -19,6 +19,8 @@ export class AdministradorPage implements OnInit {
        }
 
   ngOnInit() {
+    this.bd.seleccionarLibros()
+
   }
   
   }

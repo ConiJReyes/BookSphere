@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MenuController } from '@ionic/angular';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { DBserviceService } from 'src/app/services/dbservice.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 
 @Component({
   selector: 'app-recuperar-contra',
@@ -12,7 +15,8 @@ export class RecuperarContraPage implements OnInit {
 
   correo : string = "";
 
-  constructor(private alerta: AlertsService,private router : Router, private menuController: MenuController) { 
+
+  constructor(private alerta: AlertsService,private router : Router, private menuController: MenuController , private bd :DBserviceService, private storage: NativeStorage, private toast : ToastsService) { 
     
     this.menuController.enable(false, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
@@ -30,13 +34,34 @@ export class RecuperarContraPage implements OnInit {
   }
 
   irCambiarContra(){
-    if(!this.correo){
+
+    const correlimpio = this.correo.trim()
+
+    if(!correlimpio){
       this.alerta.GenerarAlerta('Error','Debe Ingresar un correo')
-    }else if(!this.validarCorreo(this.correo)){
+    }else if(!this.validarCorreo(correlimpio)){
       this.alerta.GenerarAlerta('Error','Debe Ingresar un correo valido')
     }else{
-      this.router.navigate(['/cambiar-contra'])}
+      this.bd.revisarCorreoExistente(correlimpio).then((res)=>{
+        if(res?.correo_user){
+          this.enviarInfo(res)
+        }else{
+          this.toast.GenerarToast('Ese no es su correo, por favor ingrese un correo valido o cree una cuenta',2000,'bottom')
+        }
+      })
+    }
+}
+
+
+enviarInfo(x:any){
+  let navigation : NavigationExtras={
+    state:{
+      envioId: x
+    }
   }
+  this.router.navigate(['/cambiar-contra'],navigation)
+}
+
 
 
 }

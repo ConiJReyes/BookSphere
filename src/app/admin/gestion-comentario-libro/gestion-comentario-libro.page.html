@@ -8,42 +8,26 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <ion-card *ngFor="let x of resenas" class="comentario-card">
+      <ion-card-header>
+        <ion-card-title>Reseña de: {{x.username}}</ion-card-title>
+        <ion-card-subtitle>Libro: {{x.titulo}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{x.fecha_elaboracion_resena | date:'short'}}</p>
+        <p>{{x.texto_resena}}</p>
+      </ion-card-content>
+      <ion-footer>
+        <ion-button (click)="banearResena(x, x.id_resena)" >Banear Comentario</ion-button>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Libros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <ion-icon *ngIf="x.estadoBan" name="thumbs-down-outline" color="danger" slot="end"></ion-icon>
 
-  <div class="container">
-    <!-- Lista de libros, que se agreguen solo si a los libros se le añadio algun comentario, si no, no-->
-    <ion-list>
-      <ion-item button detail (click)="goToComentarios(1)">
-        <ion-label>
-          <h2>Libro 1</h2>
-          <p>Autor: Autor del Libro 1</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item button detail (click)="goToComentarios(2)">
-        <ion-label>
-          <h2>Libro 2</h2>
-          <p>Autor: Autor del Libro 2</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item button detail (click)="goToComentarios(3)">
-        <ion-label>
-          <h2>Libro 3</h2>
-          <p>Autor: Autor del Libro 3</p>
-        </ion-label>
-      </ion-item>
+        <ion-button (click)="borrarResena(x)" >Borrar Reseña</ion-button>
 
 
-
-
-
-    </ion-list>
-  </div>
-</ion-content>
+      </ion-footer>
+      
+    </ion-card>
+  </ion-content>
+</div>

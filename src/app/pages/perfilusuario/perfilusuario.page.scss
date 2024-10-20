@@ -4,16 +4,13 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    border-radius: 20px; /* Bordes redondeados del contenedor */
-    background-color: #ffffff; /* Fondo blanco del contenedor */
-    max-width: 500px; /* Ancho máximo del contenedor */
+    border-radius: 20px;
+    background-color: #ffffff; 
+    max-width: 500px; 
     margin: auto;
 }
 
-.img-perfil{
-    height: 100px;
-    width: 100px;
-}
+
 
 h1{
     color: #6D4C41;
@@ -57,3 +54,17 @@ p{
 .col{
     flex: 0 1 48%;
 }
+
+.perfil-imagen {
+    width: 120px; /* Tamaño de la imagen */
+    height: 120px; /* Tamaño de la imagen */
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor redondo */
+    border: 3px solid #dfaa64; /* Borde alrededor de la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle un efecto de profundidad */
+    transition: transform 0.3s ease; /* Animación para un efecto suave */
+  }
+  
+  .perfil-imagen:hover {
+    transform: scale(1.05); /* Aumenta el tamaño al pasar el cursor por encima */
+  }

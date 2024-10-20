@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { DBserviceService } from 'src/app/services/dbservice.service';
 import { ToastsService } from 'src/app/services/toasts.service';
+import { ValidationsService } from 'src/app/services/validations.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -30,7 +31,8 @@ export class RegistrarsePage implements OnInit {
     private alerta: AlertsService,
     private toast : ToastsService,
     private bd: DBserviceService,
-    private menuController: MenuController) {
+    private menuController: MenuController,
+    private validation: ValidationsService) {
       //No mostrar ninguno de los menu en esta pagina
     this.menuController.enable(false, 'MenuPrincipal')
     this.menuController.enable(false, 'MenuAdministrador')
@@ -49,20 +51,15 @@ export class RegistrarsePage implements OnInit {
   ngOnInit() {
   }
 
-//de esta forma porque el any no es tan util para casos de seguridad
-  validarCorreo(email: string){
-    const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return patron.test(email);
-  }
-//los boolean aca sirven para devolver el valor a si es verdadero o falso
-  validarContrasena(password: string) {
-    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*_?&])[A-Za-z\d@#$!%*_?&]{8,}$/;
-    return patron.test(password);
-  }
+
 
   validacionDatosCorreo() {
+    const usernameSinEspacios = this.username.trim()
+    const passwordSinEspacios = this.password.trim()
+    const emailSinEspacios = this.email.trim()
+    const passwordRSinEspacios = this.passwordR.trim()
     //Si hay algun campo vacio pide que se llenen todos o no saldran otras alertas
-    if (!this.username || !this.password || !this.email || !this.passwordR) {
+    if (!usernameSinEspacios || !passwordSinEspacios || !emailSinEspacios || !passwordRSinEspacios) {
       this.alerta.GenerarAlerta('ERROR','Todos los campos deben ser ingresados');
       return;
     }
@@ -72,17 +69,17 @@ export class RegistrarsePage implements OnInit {
     this.contraIgual = false;
 
     // Validar correo
-    if (!this.validarCorreo(this.email)) {
+    if (!this.validation.validarCorreo(emailSinEspacios)) {
       this.correoValido = true;
     }
 
     // Validar formato de la contraseña
-    if (!this.validarContrasena(this.password) || !this.validarContrasena(this.passwordR)) {
+    if (!this.validation.validarContrasena(passwordSinEspacios) || !this.validation.validarContrasena(passwordRSinEspacios)) {
       this.contraValida = true;
     }
 
     // Verificar si las contraseñas coinciden
-    if (this.password !== this.passwordR) {
+    if (passwordSinEspacios !== passwordRSinEspacios) {
       this.contraIgual = true;
     }
 
@@ -95,11 +92,14 @@ export class RegistrarsePage implements OnInit {
     }
 //Permite que los datos del user registrados esten disponibles en el login
 Registrarse() {
-  this.bd.verificarCorreoUsuario(this.username,this.email).then(existe=>{
+  const usernameSinEspacios = this.username.trim()
+  const emailSinEspacios = this.email.trim()
+  const passwordSinEspacios = this.password.trim()
+  this.bd.verificarCorreoUsuario(usernameSinEspacios,emailSinEspacios).then(existe=>{
     if(existe){
       this.alerta.GenerarAlerta('Error','El nombre de usuario o correo ya existen')
     }else{
-      this.bd.insertarUsuario(this.username,this.email,this.password).then(()=>{  
+      this.bd.insertarUsuario(usernameSinEspacios,emailSinEspacios,passwordSinEspacios).then(()=>{  
 
         this.username = "";
         this.email = "";

@@ -1,0 +1,60 @@
+.libro-detalle-card {
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f2dcb3;
+}
+
+.portada-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 400px; 
+}
+
+.portada-img {
+  height: 100%; 
+  width: auto; 
+  border-radius: 15px 15px 0 0;
+  object-fit: cover;
+}
+
+.boton-favorito {
+  --background: #dfaa64; 
+  --color: #ffffff; 
+  --ion-color-primary: #dfaa64; 
+}
+
+.boton-favorito ion-icon {
+  color: #bf6734; 
+}
+
+.boton-resena {
+  --background: #dfaa64;
+  --color: #ffffff; 
+  --ion-color-primary: #dfaa64; 
+}  
+
+ion-card-header {
+  text-align: center;
+  margin-top: 10px;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+ion-card-subtitle {
+  font-size: 16px;
+  color: #718096;
+}
+
+ion-card-content {
+  padding: 20px;
+}
+
+ion-item p {
+  color: #4a5568;
+}

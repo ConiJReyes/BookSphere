@@ -17,25 +17,25 @@
 
     <!-- Lista de Usuarios -->
     <ion-list>
-      <ion-item *ngFor="let x of arregloUsuarios" (click)="seleccionarUsuario(x)">
+      <ion-item *ngFor="let x of arregloUsuarios" (click)="seleccionarUsuario(x)" class="usuario-item">
         <ion-label>
-          <p>{{x.id_usuario}}</p>
           <h2>{{x.username }}</h2>
-          <p>{{x.correo_user }}</p>
-          <p>{{x.id_rol === 1 ? 'Administrador' : x.id_rol === 2 ? 'Usuario' : 'Desconocido'}}</p>
+          <p><strong>ID:</strong> {{x.id_usuario}}</p>
+          <p><strong>Correo:</strong> {{x.correo_user }}</p>
+          <p><strong>Rol:</strong> {{x.id_rol === 1 ? 'Administrador' : x.id_rol === 2 ? 'Usuario' : 'Desconocido'}}</p>
         </ion-label>
       </ion-item>
     </ion-list>
 
     <!-- Detalles del Usuario Seleccionado -->
-    <ion-card *ngIf="usuarioSeleccionado" class="usuario-card"  >
+    <ion-card *ngIf="usuarioSeleccionado" class="usuario-card">
       <ion-card-header>
         <ion-card-title>Detalles de {{ usuarioSeleccionado.username }}</ion-card-title>
         <ion-button fill="clear" (click)="cerrarDetalles()">Cerrar</ion-button>
       </ion-card-header>
       <ion-card-content>
         <p><strong>Correo:</strong> {{ usuarioSeleccionado.correo_user }}</p>
-    
+        
         <ion-item>
           <ion-label position="floating">Nuevo Nombre de Usuario</ion-label>
           <ion-input [(ngModel)]="usuarioSeleccionado.username"></ion-input>
@@ -46,8 +46,8 @@
           <ion-input [(ngModel)]="usuarioSeleccionado.correo_user"></ion-input>
         </ion-item>
     
-        <ion-button expand ="full" (click)="guardarCambios()">Guardar Cambios</ion-button>
-        <ion-button expand ="full" (click)="eliminarUsuario()">Eliminar Usuario</ion-button>
+        <ion-button expand="full" color="primary" (click)="guardarCambios()">Guardar Cambios</ion-button>
+        <ion-button expand="full" color="danger" (click)="eliminarUsuario()">Eliminar Usuario</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-content>

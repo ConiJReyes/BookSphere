@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MenuController } from '@ionic/angular';
+import { Libros } from 'src/app/modules/libros';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { DBserviceService } from 'src/app/services/dbservice.service';
 
 
 @Component({
@@ -9,49 +14,85 @@ import { MenuController } from '@ionic/angular';
 })
 export class FeedPage implements OnInit {
 
+  libros: Libros[] = [];
+  librosFiltrados: Libros[] = [];
+  librosFavoritos: any[] = [];
+  librosPopulares: any[] = [];
+  librosEstreno: any[] = [];
 
- 
-  libros: any[] = [
-    // lista de libros clásicos
-    { titulo: '1984', autor: 'George Orwell', imagen: 'assets/img/libro1984.jpg' },
-    { titulo: 'El gran Gatsby', autor: 'F. Scott Fitzgerald', imagen: 'assets/img/librogatsby.jpeg' },
-    { titulo: 'Orgullo y prejuicio', autor: 'Jane Austen', imagen: 'assets/img/libroorgulloyprej.webp' },
-    // Lista de libros de fantasía
-    { titulo: 'El Hobbit', autor: 'J.R.R. Tolkien', imagen: 'assets/img/librohobbit.webp' },
-    { titulo: 'Harry Potter y la piedra filosofal', autor: 'J.K. Rowling', imagen: 'assets/img/librohp1.webp' },
-    { titulo: 'Harry Potter y la cámara secreta', autor: 'J.K. Rowling', imagen: 'assets/img/librohp2.webp' },
-    { titulo: 'Harry Potter y el prisionero de Azkaban', autor: 'J.K. Rowling', imagen: 'assets/img/librohp3.webp' },
-    { titulo: 'Harry Potter y el cáliz de fuego', autor: 'J.K. Rowling', imagen: 'assets/img/librohp4.webp' },
-    { titulo: 'Harry Potter y la Orden del Fénix', autor: 'J.K. Rowling', imagen: 'assets/img/librohp5.webp' },
-    { titulo: 'Harry Potter y el misterio del príncipe', autor: 'J.K. Rowling', imagen: 'assets/img/librohp6.webp' },
-    { titulo: 'Harry Potter y las reliquias de la Muerte', autor: 'J.K. Rowling', imagen: 'assets/img/librohp7.avif' },
-    { titulo: 'Canción de hielo y fuego: Juego de tronos', autor: 'George R.R. Martin', imagen: 'assets/img/librogot1.webp' },
-    { titulo: 'Alas de sangre', autor: 'Rebecca Yarros', imagen: 'assets/img/alasdesangre.webp' },
-  
-    // lista de libros de terror
-    { titulo: 'It', autor: 'Stephen King', imagen: 'assets/img/libroIt.webp' },
-    { titulo: 'La maldición de Hill House', autor: 'Shirley Jackson', imagen: 'assets/img/librohillhouse.webp' },
-    { titulo: 'El Exorcista', autor: 'William Peter Blatty', imagen: 'assets/img/libroexorcista.webp' },
-    // agregar más categorías
-    { titulo: 'Romper el círculo', autor: 'Colleen Hoover', imagen: 'assets/img/romperelcirculo.webp' },
-    { titulo: 'Tan Poca Vida', autor: 'Hanya Yanagihara', imagen: 'assets/img/tanpocavida.webp' },
+  images = [
+    { src: 'assets/img/categorias.png', link: '/categorias' },
+    { src: 'assets/img/Opiniones.png', link: '/acercade' },
+    { src: 'assets/img/Estrenos.png', link: '/libros-estrenos' }
   ];
+  
+  categoriaFoto : string = 'assets/img/categorias.png'
+  currentIndex: number = 0;
 
-  librosFiltrados: any[] = [];
 
+  hayBusqueda: boolean = false;
 
-
-
-  constructor( private menuController: MenuController){
+  constructor( private menuController: MenuController, private bd : DBserviceService, private storage: NativeStorage, private alerta : AlertsService, private router : Router){
   /// Menu controller    
     this.menuController.enable(true, 'MenuPrincipal');
     this.menuController.enable(false, 'MenuAdministrador');
     
-   }
+  
+  
+  }
+   
+ 
+  buscarLibro(event: any) {
+    const query = event.target.value?.toLowerCase().trim() || '';
+    console.log('Consulta de búsqueda:', query); 
 
+    this.hayBusqueda = query !== '';
 
+    if (this.hayBusqueda) {
+      this.librosFiltrados = this.libros.filter(libro =>
+        libro.titulo.toLowerCase().includes(query) || 
+        libro.ISBN.toLowerCase().includes(query)
+      );
+      console.log('Resultados encontrados:', this.librosFiltrados);
+    } else {
+      this.librosFiltrados = [...this.libros];
+    }
+  }
+
+  irCadaLibro(x : any){
+    let NavigationExtras : NavigationExtras={
+      state:{
+        libroSeleccionado: x
+      }
+    }
+    this.router.navigate(['/detalleslibro'],NavigationExtras)
+  }
 
   ngOnInit() {
- 
+
+    this.bd.obtenerLibrosEstreno()
+    this.bd.fetchLibrosEstrenos().subscribe(data=>{
+      this.librosEstreno = data
+    })
+
+    this.bd.obtenerLibrosPopulares()
+    this.bd.fetchLibrosPopulares().subscribe(data=>{
+      this.librosPopulares = data
+    })
+
+    this.bd.seleccionarLibros()
+    this.bd.fetchLibros().subscribe((data) => {
+      this.libros = data;   
+    });
+    
   }
+
+prevSlide() {
+    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.images.length - 1;
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex < this.images.length - 1) ? this.currentIndex + 1 : 0;
+  }
+
 }

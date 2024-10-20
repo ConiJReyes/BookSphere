@@ -16,6 +16,7 @@ export class VerLibrosAdminPage implements OnInit {
 
   arregloLibros: Libros[]= []
   libroSeleccionado : any
+  estadoSelec: string = ''
 
   pestanaModificarLibro : boolean = false
   pestanaEliminarLibro : boolean = false
@@ -38,6 +39,14 @@ export class VerLibrosAdminPage implements OnInit {
       }
     })
 
+  }
+
+  validarInput(event: any) {
+    const inputValue = event.target.value;
+    if (inputValue < 0){ 
+      this.libroSeleccionado.cantidad_paginas = 0;
+    }
+    
   }
 
   editarLibro(){
@@ -93,8 +102,8 @@ export class VerLibrosAdminPage implements OnInit {
      }else{
       this.toast.GenerarToast('No se pudo obtener la imagen.',2000,'bottom')
      }
-    }catch(error){
-      if (error === 'User cancelled photos app'){
+    }catch(error : any){
+      if (error === 'User cancelled photos app'|| error.message === 'User cancelled photos app'){
         return
       }else{
         this.alerta.GenerarAlerta('Error','Error con ingresar Imagen'+ error) 

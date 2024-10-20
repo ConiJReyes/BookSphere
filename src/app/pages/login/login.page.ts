@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MenuController } from '@ionic/angular';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { DBserviceService } from 'src/app/services/dbservice.service';
@@ -10,7 +11,7 @@ import { DBserviceService } from 'src/app/services/dbservice.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  email: string = '';
+
   usuario: string = '';
   password: string = '';
 
@@ -22,7 +23,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private alerta : AlertsService,
     private menuControlelr: MenuController,
-    private bd : DBserviceService
+    private bd : DBserviceService,
+    private storage : NativeStorage
   ) {
     //Eliminar los menus de esta pagina
 
@@ -36,14 +38,20 @@ export class LoginPage implements OnInit {
 
 
   inicioSesion() {
-    if (!this.usuario || !this.password) {
+
+
+    const usuarioSinEspacios = this.usuario.trim();
+    const passwordSinEspacios = this.password.trim()
+
+    if (!usuarioSinEspacios || !passwordSinEspacios) {
       this.alerta.GenerarAlerta('Error','Debe ingresar datos');
     }else{
-      this.bd.inicioSesionUsuario(this.usuario, this.password).then(usuario=>{
+      this.bd.inicioSesionUsuario(usuarioSinEspacios, passwordSinEspacios).then(usuario=>{
         if(usuario){
           if(usuario.id_rol === 1){
             this.router.navigate(['/administrador']);
           }else{
+            this.guardarUsuario(usuario.id_usuario)
             this.router.navigate(['/feed']);
           }
           this.usuario = "";
@@ -55,6 +63,14 @@ export class LoginPage implements OnInit {
       }).catch(e => {
         this.alerta.GenerarAlerta('Error', 'Error al iniciar sesión: ' + JSON.stringify(e));
       });
+    }
+  }
+
+  async guardarUsuario(usuarioID:number){
+    try {
+      await this.storage.setItem('usuario_iniciado', usuarioID);
+    } catch (error) {
+      this.alerta.GenerarAlerta('Error', 'Error al guardar el usuario: ' + JSON.stringify(error));
     }
   }
 

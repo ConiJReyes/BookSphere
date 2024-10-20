@@ -19,7 +19,7 @@
         <ion-input
           label="Usuario"
           labelPlacement="floating"
-          [(ngModel)]="usuario"
+          [(ngModel)]="usuario.username"
           name="username"
           placeholder="Ingrese el usuario"
           
@@ -30,7 +30,7 @@
         <ion-input
           label="Correo"
           labelPlacement="floating"
-          [(ngModel)]="correo"
+          [(ngModel)]="usuario.correo_user"
           name="email"
           placeholder="Ingrese correo"
           
@@ -65,7 +65,11 @@
         </ion-button>
       </ion-input>
       </ion-item>
-      
+     
+    <ion-button color="light" (click)="ingresarImagen()" >Nueva Foto de perfil <ion-icon slot="end" name="image-outline"></ion-icon> </ion-button>
+    <img *ngIf="usuario.foto_perfil" [src]="usuario.foto_perfil" class="perfil-imagen"> 
+
+
   
       <ion-button
         shape="round"
@@ -81,7 +85,7 @@
       <p *ngIf="correoValido">-Ingrese un correo válido</p>
       <p *ngIf="contraValida">-La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.</p>
       <p *ngIf="contraIgual">-Las contraseñas no coinciden, intentelo nuevamente.</p>
-      <p *ngIf="contraMisma">-No puede usar datos de su usuario anterior</p>
+      
     </div>
   </div>
 </ion-content>
